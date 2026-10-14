@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>평창·제천 미식 힐링 로드 (10/17 - 10/22)</title>
+  <meta name="description" content="10/17-10/22 평창-제천 여행 모바일 일정표 (모나용평 랭글러정모, 휘게포레스트, 리솜제천)">
+  <meta name="theme-color" content="#2D5A27">
+  <!-- PWA & Mobile Web App Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="평창제천여행">
+  <style>
+    :root {
+      --primary: #2D5A27;
+      --primary-light: #EBF3E8;
+      --primary-dark: #1E3D1A;
+      --accent: #E07A5F;
+      --accent-light: #FDF0ED;
+      --jeep-orange: #E65100;
+      --jeep-bg: #FFF3E0;
+      --bg: #F4F6F2;
+      --card-bg: #FFFFFF;
+      --text: #212529;
+      --text-muted: #6C757D;
+      --border: #E2E8DF;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --badge-morning: #FF9800;
+      --badge-lunch: #2E7D32;
+      --badge-dinner: #6A1B9A;
+      --badge-activity: #1976D2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+      background-color: #E6EAE4;
+      color: var(--text);
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Mobile Container App Layout */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+      padding-bottom: 95px; /* Space for bottom nav */
+    }
+
+    /* Unified Sticky Top Wrapper (Eliminates Sticky Overlap Bug) */
+    .sticky-top-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: #FFFFFF;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1A3617 0%, #2D5A27 75%, #3B7234 100%);
+      color: white;
+      padding: 18px 18px 14px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .badge-dday {
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .trip-dates {
+      font-size: 0.78rem;
+      opacity: 0.88;
+      font-weight: 500;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-subtitle {
+      font-size: 0.78rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    /* Destination Tabs Navigation Bar */
+    .tab-bar-container {
+      background: #FFFFFF;
+      padding: 8px 12px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-scroll-wrapper {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+
+    .tab-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tab-btn {
+      flex: 0 0 auto;
+      border: 1px solid #DCE3D8;
+      background: #F8F9FA;
+      color: #495057;
+      padding: 7px 13px;
+      border-radius: 22px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .nav-tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(45, 90, 39, 0.3);
+    }
+
+    /* Main Content */
+    main {
+      padding: 14px;
+      flex: 1;
+    }
+
+    /* Hero Banner for Destination */
+    .dest-hero-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dest-hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .dest-hero-card.jeep-theme::before {
+      background: var(--jeep-orange);
+    }
+
+    .dest-hero-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .dest-hero-desc {
+      font-size: 0.83rem;
+      color: #4A5568;
+      line-height: 1.45;
+    }
+
+    .dest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 9px;
+    }
+
+    .dest-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .dest-tag.jeep {
+      background: var(--jeep-bg);
+      color: var(--jeep-orange);
+    }
+
+    /* Official Pamphlet Link Card */
+    .pamphlet-banner {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFE0B2 100%);
+      border: 1px solid #FFB74D;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .pamphlet-banner-text {
+      flex: 1;
+      font-size: 0.8rem;
+      color: #795548;
+      line-height: 1.35;
+    }
+
+    .pamphlet-banner-text strong {
+      color: #D84315;
+      display: block;
+      font-size: 0.86rem;
+      margin-bottom: 2px;
+    }
+
+    .pamphlet-btn {
+      background: #E65100;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(230, 81, 0, 0.3);
+    }
+
+    /* Day Block & Headers */
+    .day-block {
+      margin-bottom: 18px;
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+
+    .day-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--primary-dark);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 16px;
+    }
+
+    .day-badge.jeep {
+      background: #D84315;
+    }
+
+    .day-date-str {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Timetable / Event Timeline Card */
+    .timeline-card {
+      background: #FFFFFF;
+      border: 1px solid #FFE0B2;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .timeline-header {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #E65100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed #FFE0B2;
+      padding-bottom: 5px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 7px;
+      line-height: 1.35;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-time {
+      flex: 0 0 85px;
+      font-weight: 700;
+      color: #374151;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timeline-desc {
+      flex: 1;
+      color: #4B5563;
+    }
+
+    .timeline-desc strong {
+      color: #111827;
+    }
+
+    .timeline-loc {
+      font-size: 0.72rem;
+      color: #6B7280;
+      display: block;
+      margin-top: 1px;
+    }
+
+    /* Meal Card */
+    .meal-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      margin-bottom: 9px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .meal-card.completed {
+      opacity: 0.62;
+      background: #F8F9FA;
+    }
+
+    .meal-card-inner {
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    .meal-type-pill {
+      flex: 0 0 auto;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: white;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .meal-type-pill.morning { background: var(--badge-morning); }
+    .meal-type-pill.lunch { background: var(--badge-lunch); }
+    .meal-type-pill.dinner { background: var(--badge-dinner); }
+    .meal-type-pill.rally { background: var(--jeep-orange); }
+
+    .meal-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .meal-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .meal-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text);
+      word-break: keep-all;
+    }
+
+    .meal-card.completed .meal-title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .meal-check-btn {
+      background: none;
+      border: 1px solid #CED4DA;
+      border-radius: 6px;
+      padding: 2px 7px;
+      cursor: pointer;
+      color: #6C757D;
+      font-size: 0.72rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .meal-card.completed .meal-check-btn {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .meal-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.38;
+      word-break: keep-all;
+    }
+
+    /* Sub Action / Store / Items Inside Meal Card */
+    .sub-item-box {
+      margin-top: 7px;
+      padding: 7px 9px;
+      background: #F8F9FA;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent);
+      font-size: 0.78rem;
+    }
+
+    .sub-item-header {
+      font-weight: 600;
+      color: #A33A1F;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .sub-item-content {
+      color: #495057;
+      line-height: 1.35;
+    }
+
+    /* Quick Map Links */
+    .map-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .map-chip {
+      font-size: 0.71rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: #495057;
+    }
+
+    .map-chip.naver {
+      color: #03C75A;
+      border-color: #03C75A44;
+    }
+
+    .map-chip.kakao {
+      color: #3C1E1E;
+      background: #FEE50014;
+      border-color: #FEE50066;
+    }
+
+    /* Checklist Section */
+    .checklist-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    .checklist-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--primary-dark);
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 0;
+      border-bottom: 1px solid #F1F3F5;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .checklist-item.checked span {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* Information / Tips Card */
+    .tip-card {
+      background: #FEF9F5;
+      border: 1px solid #FADEC9;
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #7D4822;
+      line-height: 1.4;
+    }
+
+    .tip-card-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+
+    /* Fixed Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 7px 0 9px;
+      z-index: 500;
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 3px 6px;
+      transition: color 0.15s;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--primary);
+    }
+
+    .bottom-nav-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(33, 37, 41, 0.92);
+      color: white;
+      padding: 7px 15px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.22s ease;
+      z-index: 600;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Unified Sticky Top Wrapper (Header + Tab Bar Together) -->
+    <div class="sticky-top-wrapper">
+      <header>
+        <div class="header-top">
+          <span class="badge-dday" id="dDayBadge">D-DAY 계산중</span>
+          <span class="trip-dates">10/17(토) ~ 10/22(목) · 5박 6일</span>
+        </div>
+        <h1 class="header-title">
+          <span>🗺️</span> 평창·제천 미식 힐링 로드
+        </h1>
+        <p class="header-subtitle">모나용평 정모 · 휘게포레스트 캠핑 · 포레스트리솜 스파</p>
+      </header>
+
+      <!-- Destination Tabs -->
+      <div class="tab-bar-container">
+        <div class="tab-scroll-wrapper" id="tabContainer">
+          <button class="nav-tab-btn active" id="tab-btn-all" onclick="switchTab('all')">
+            <span>📋</span> 전체 일정
+          </button>
+          <button class="nav-tab-btn" id="tab-btn-yongpyong" onclick="switchTab('yongpyong')">
+            <span>🚙</span> 모나 용평 (1일차)
+          </button>
+          <button class="nav-tab-btn" id="tab-btn-hygge" onclick="switchTab('hygge')">
+            <span>⛺</span> 휘게포레스트 (2~3일차)
+          </button>
+          <button class="nav-tab-btn" id="tab-btn-resom" onclick="switchTab('resom')">
+            <span>🌲</span> 리솜 제천 (4~5일차)
+          </button>
+          <button class="nav-tab-btn" id="tab-btn-return" onclick="switchTab('return')">
+            <span>🚗</span> 복귀 여정 (6일차)
+          </button>
+          <button class="nav-tab-btn" id="tab-btn-shopping" onclick="switchTab('shopping')">
+            <span>🛒</span> 장보기/체크
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+
+      <!-- ================= 1. TAB: ALL (전체 일정) ================= -->
+      <div id="tab-content-all" class="tab-content-pane">
+        
+        <!-- Summary Stats Card -->
+        <div class="dest-hero-card">
+          <div class="dest-hero-title">
+            <span>✨</span> 5박 6일 여정 요약
+          </div>
+          <div class="dest-hero-desc">
+            평창 대관령 제12회 랭글러매니아 전국정모를 시작으로, 휘게포레스트 숲속 캠핑과 제천 리솜 웰니스 스파까지 이어지는 힐링 미식 로드맵입니다.
+          </div>
+          <div class="dest-tags">
+            <span class="dest-tag jeep">제12회 랭글러 전국정모</span>
+            <span class="dest-tag">황태덕장</span>
+            <span class="dest-tag">장어 바비큐</span>
+            <span class="dest-tag">제천시장 3총사</span>
+            <span class="dest-tag">해브나인 스파</span>
+            <span class="dest-tag">더그릴720/모요우</span>
+            <span class="dest-tag">이비가 짬뽕</span>
+          </div>
+        </div>
+
+        <!-- 1일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge jeep">DAY 1</div>
+            <div class="day-date-str">10/17(토) · 모나 용평 (랭글러 전국정모)</div>
+          </div>
+          
+          <div class="meal-card" data-meal-id="d1-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">삼각김밥 (이동 중)</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d1-bf')">체크</button>
+                </div>
+                <div class="meal-note">⚠️ 출발 당일 아침 혼잡 대비 <strong>전날 밤 미리 구매</strong>해두기!</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card" data-meal-id="d1-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">황태덕장</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d1-lc')">체크</button>
+                </div>
+                <div class="meal-note">12:00 정모 체크인 전 대관령 대표 황태구이 & 황태국 식사</div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=평창+황태덕장" target="_blank" class="map-chip naver">🟢 네이버 지도</a>
+                  <a href="https://m.map.kakao.com/actions/searchView?q=평창+황태덕장" target="_blank" class="map-chip kakao">🟡 카카오맵</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 정모 1일차 프로그램 카드 -->
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span>🚙</span> 제12회 랭글러 전국정모 (Day 1 타임테이블)
+            </div>
+            <ul class="timeline-list">
+              <li class="timeline-item">
+                <span class="timeline-time">12:00 ~ 17:00</span>
+                <span class="timeline-desc"><strong>기념품 수령 & 숙소 체크인</strong><span class="timeline-loc">운영실 및 숙소 프론트 (정리완료 객실부터 순차)</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">12:00 ~ 17:30</span>
+                <span class="timeline-desc"><strong>행사부스 & 이벤트 & 오프로드 체험</strong><span class="timeline-loc">필로티 주차장 (모듈체험 12:00~16:00, 사격, 포토존)</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">17:30 ~ 19:00</span>
+                <span class="timeline-desc"><strong>정모 석식 (모나용평 뷔페)</strong> 🎫<span class="timeline-loc">블리스힐스테이 웰니스홀 (명찰/식권 지참 필수!)</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">19:00 ~ 21:00</span>
+                <span class="timeline-desc"><strong>메인행사 1부 & 1일차 경품 추첨</strong><span class="timeline-loc">블리스힐스테이 웰니스홀</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">21:00 ~ 23:30</span>
+                <span class="timeline-desc"><strong>메인행사 2부 (키즈 매직쇼 & 회원 뒷풀이)</strong><span class="timeline-loc">블리스힐스테이 웰니스홀 (23:30 종료)</span></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="meal-card" data-meal-id="d1-dn">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill rally">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">모나용평 뷔페 (정모 제공 석식)</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d1-dn')">체크</button>
+                </div>
+                <div class="meal-note">17:30~19:00 블리스힐스테이 웰니스홀 (명찰 및 식권 필수 지참)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">DAY 2</div>
+            <div class="day-date-str">10/18(일) · 모나용평 ➡️ 휘게포레스트 캠핑장</div>
+          </div>
+
+          <!-- 2일차 정모 조식 & 피날레 -->
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span>🚙</span> 랭글러 전국정모 (Day 2 피날레)
+            </div>
+            <ul class="timeline-list">
+              <li class="timeline-item">
+                <span class="timeline-time">08:00 ~ 09:30</span>
+                <span class="timeline-desc"><strong>조식 (황태해장국)</strong><span class="timeline-loc">카페테리아 아백 (블리스힐스테이 웰니스홀 앞)</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">09:30 ~ 11:00</span>
+                <span class="timeline-desc"><strong>숙소 체크아웃</strong><span class="timeline-loc">각 숙소 프론트</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">11:00 ~ 12:30</span>
+                <span class="timeline-desc"><strong>슬로프 체험 & 기념사진 & 경품 추첨</strong><span class="timeline-loc">애니포레 · 골드코스</span></span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">12:30</span>
+                <span class="timeline-desc"><strong>행사 종료 및 해산</strong> ➡️ 캠핑장으로 출발!</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="meal-card" data-meal-id="d2-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill rally">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">황태해장국 (정모 제공 조식)</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d2-bf')">체크</button>
+                </div>
+                <div class="meal-note">08:00~09:30 블리스힐스테이 앞 '카페테리아 아백'</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card" data-meal-id="d2-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">롯데리아 & 장보기</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d2-lc')">체크</button>
+                </div>
+                <div class="meal-note">정모 해산 후 햄버거 점심 식사 및 캠핑 장보기 경유</div>
+                <div class="sub-item-box">
+                  <div class="sub-item-header">🛒 필수 경유 장보기 (하나로마트 / 롯데슈퍼)</div>
+                  <div class="sub-item-content">
+                    • 구입 품목: 저녁거리(장어?), 이소가스, 생수/주류, 컵라면
+                  </div>
+                  <div class="map-btn-group" style="margin-top:5px;">
+                    <a href="https://m.map.naver.com/search2/search.naver?query=평창+하나로마트" target="_blank" class="map-chip naver">하나로마트</a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=평창+롯데슈퍼" target="_blank" class="map-chip naver">롯데슈퍼</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card" data-meal-id="d2-dn">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">장본 음식 (장어 바비큐?)</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d2-dn')">체크</button>
+                </div>
+                <div class="meal-note">⛺ 휘게포레스트 숲속 첫날밤 화로 장어구이 만찬</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">DAY 3</div>
+            <div class="day-date-str">10/19(월) · 휘게포레스트 캠핑장</div>
+          </div>
+          <div class="meal-card" data-meal-id="d3-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">캠핑장 매점</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d3-bf')">체크</button>
+                </div>
+                <div class="meal-note">웰컴라운지 매점의 따뜻한 모닝커피 & 베이커리</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d3-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">매점 or 마트 다녀오기</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d3-lc')">체크</button>
+                </div>
+                <div class="meal-note">캠핑 사이트 힐링 런치 or 인근 대화/방림면 드라이브</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d3-dn">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">캠핑장 매점 / 힐링 요리</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d3-dn')">체크</button>
+                </div>
+                <div class="meal-note">자작나무 숲속 캠핑의 마지막 밤 낭만 만찬</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">DAY 4</div>
+            <div class="day-date-str">10/20(화) · 리솜 제천 (체크인 & 시장투어)</div>
+          </div>
+          <div class="meal-card" data-meal-id="d4-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">컵라면</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d4-bf')">체크</button>
+                </div>
+                <div class="meal-note">캠핑 사이트 철수 전 텐트에서 따끈하게 한 그릇</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d4-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">제천 중앙시장 먹거리 3선</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d4-lc')">체크</button>
+                </div>
+                <div class="meal-note">
+                  🍡 <strong>외가집</strong> (빨간오뎅/튀김)<br>
+                  🍩 <strong>덩실분식</strong> (도넛/찹쌀떡 - 제천 명물)<br>
+                  🍗 <strong>효강정</strong> (닭강정 포장)
+                </div>
+                <div class="sub-item-box">
+                  <div class="sub-item-header">☕ 식후 카페 추천</div>
+                  <div class="sub-item-content"><strong>다람쥐까페</strong> (리솜 둘레길 산책 or 커피타임)</div>
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+외가집" target="_blank" class="map-chip naver">외가집</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+덩실분식" target="_blank" class="map-chip naver">덩실분식</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+효강정" target="_blank" class="map-chip naver">효강정</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=리솜+다람쥐카페" target="_blank" class="map-chip kakao">다람쥐까페</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d4-dn">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">더그릴720 / 모요우 + 둥지치킨</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d4-dn')">체크</button>
+                </div>
+                <div class="meal-note">리솜 야외 바비큐 더그릴720 or 일식 다이닝 모요우 후 야식 둥지치킨 포장!</div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=리솜+더그릴720" target="_blank" class="map-chip naver">더그릴720</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=포레스트리솜+모요우" target="_blank" class="map-chip naver">모요우</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+둥지치킨" target="_blank" class="map-chip kakao">둥지치킨</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">DAY 5</div>
+            <div class="day-date-str">10/21(수) · 리솜 제천 (스파 데이)</div>
+          </div>
+          <div class="meal-card" data-meal-id="d5-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">편의점 간편식</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d5-bf')">체크</button>
+                </div>
+                <div class="meal-note">리솜 내 편의점에서 모닝 샌드위치 & 커피</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d5-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">푸드오클락 (수영장 내)</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d5-lc')">체크</button>
+                </div>
+                <div class="meal-note">🏊 해브나인 힐링스파 & 인피니티풀 수영 중간 따뜻한 점심</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d5-dn">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">더그릴720 / 모요우</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d5-dn')">체크</button>
+                </div>
+                <div class="meal-note">어제 안 간 곳(바비큐 or 이자카야)으로 리솜의 마지막 밤 만찬</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6일차 요약 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">DAY 6</div>
+            <div class="day-date-str">10/22(목) · 복귀 여정</div>
+          </div>
+          <div class="meal-card" data-meal-id="d6-bf">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">편의점 간편식</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d6-bf')">체크</button>
+                </div>
+                <div class="meal-note">체크아웃 전 가벼운 아침 & 귀가 짐정리</div>
+              </div>
+            </div>
+          </div>
+          <div class="meal-card" data-meal-id="d6-lc">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title-row">
+                  <div class="meal-title">이비가 짬뽕</div>
+                  <button class="meal-check-btn" onclick="toggleMeal('d6-lc')">체크</button>
+                </div>
+                <div class="meal-note">🍜 진한 한우사골 국물 짬뽕 & 찹쌀탕수육으로 개운하게 마무리!</div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+이비가짬뽕" target="_blank" class="map-chip naver">🟢 제천점 네이버 지도</a>
+                  <a href="https://m.map.kakao.com/actions/searchView?q=제천+이비가짬뽕" target="_blank" class="map-chip kakao">🟡 카카오맵</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= 2. TAB: MONA YONGPYONG (모나 용평) ================= -->
+      <div id="tab-content-yongpyong" class="tab-content-pane" style="display: none;">
+        
+        <!-- Official Pamphlet Banner -->
+        <div class="pamphlet-banner">
+          <div class="pamphlet-banner-text">
+            <strong>제12회 랭글러 매니아 전국정모 팜플렛</strong>
+            10/17(토)~10/18(일) 모나용평 공식 안내페이지 확인
+          </div>
+          <a href="https://donsnote.github.io/pamphlet/wrangler-2026" target="_blank" class="pamphlet-btn">공식 팜플렛 ↗</a>
+        </div>
+
+        <div class="dest-hero-card jeep-theme">
+          <div class="dest-hero-title">
+            <span>🏔️</span> 모나 용평 (대관령)
+          </div>
+          <div class="dest-hero-desc">
+            <strong>1일차 (10/17 토)</strong> 메인 스팟! 강원도 평창군 대관령면 올림픽로 715.<br>
+            국내 최대 랭글러 페스티벌 <strong>제12회 랭글러매니아 전국정모 (1박 2일)</strong> 공식 일정 및 식사 안내입니다.
+          </div>
+          <div class="dest-tags">
+            <span class="dest-tag jeep">제12회 랭글러 전국정모</span>
+            <span class="dest-tag">오프로드 모듈체험</span>
+            <span class="dest-tag">블리스힐스테이 뷔페</span>
+            <span class="dest-tag">키즈 매직쇼 & 뒷풀이</span>
+          </div>
+        </div>
+
+        <!-- 1일차 상세 플랜 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge jeep">1일차 (10/17 토) 상세 일정</div>
+            <div class="day-date-str">모나용평 입실 & 정모 Day 1</div>
+          </div>
+
+          <!-- 아침 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">삼각김밥 (출발 차량 이동 중)</div>
+                <div class="meal-note">
+                  📌 <strong>사전 준비:</strong> 이른 아침 대관령 출발을 위해 <strong>전날 저녁 미리 구매</strong>해두기!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 점심 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">황태덕장 (대관령 본점)</div>
+                <div class="meal-note">
+                  정모 체크인(12:00~) 시작 전 대관령 대표 명물 황태구이 & 뽀얀 황태해장국으로 든든한 점심!
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=평창+황태덕장" target="_blank" class="map-chip naver">🟢 네이버 지도</a>
+                  <a href="https://m.map.kakao.com/actions/searchView?q=평창+황태덕장" target="_blank" class="map-chip kakao">🟡 카카오맵</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1일차 정모 공식 타임테이블 -->
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span>📋</span> 제12회 랭글러 전국정모 공식 1일차 프로그램
+            </div>
+            <ul class="timeline-list">
+              <li class="timeline-item">
+                <span class="timeline-time">12:00 ~ 17:00</span>
+                <span class="timeline-desc">
+                  <strong>기념품 수령 및 숙소 체크인</strong>
+                  <span class="timeline-loc">장소: 운영실 및 각 숙소 프론트 (정리 완료된 객실부터 12:00 순차 체크인)</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">12:00 ~ 17:30</span>
+                <span class="timeline-desc">
+                  <strong>행사부스 & 정모 이벤트 & 리조트 시설</strong>
+                  <span class="timeline-loc">장소: 필로티 주차장 및 리조트 내<br>
+                  • 협력업체 부스 관람<br>
+                  • 오프로드 모듈 체험 (12:00 ~ 16:00)<br>
+                  • 사격대회, 포토존 이벤트</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">17:30 ~ 19:00</span>
+                <span class="timeline-desc">
+                  <strong>정모 공식 석식 (모나용평 뷔페)</strong>
+                  <span class="timeline-loc">장소: 블리스힐스테이 웰니스홀<br>
+                  ⚠️ <strong>필수:</strong> 명찰 및 식권 지참 필수!</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">19:00 ~ 21:00</span>
+                <span class="timeline-desc">
+                  <strong>전국정모 메인행사 1부 & 1일차 경품 추첨</strong>
+                  <span class="timeline-loc">장소: 블리스힐스테이 웰니스홀</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">21:00 ~ 23:30</span>
+                <span class="timeline-desc">
+                  <strong>전국정모 메인행사 2부 (키즈 매직쇼 & 회원 뒷풀이)</strong>
+                  <span class="timeline-loc">장소: 블리스힐스테이 웰니스홀</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">23:30</span>
+                <span class="timeline-desc">
+                  <strong>1일차 공식 행사 종료 및 취침</strong>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 저녁 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill rally">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title">모나용평 뷔페 (정모 제공)</div>
+                <div class="meal-note">
+                  17:30 ~ 19:00 블리스힐스테이 웰니스홀 (명찰/식권 지참 필수)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-title">💡 대관령 모나용평 정모 팁</div>
+          • 10월 대관령 야간은 영하권에 준하는 쌀쌀한 날씨이므로 두꺼운 외투나 플리스를 반드시 챙기세요.<br>
+          • 오프로드 모듈 체험(12:00~16:00)은 대기가 발생할 수 있으니 체크인 후 일찍 방문하는 것을 추천합니다.
+        </div>
+      </div>
+
+      <!-- ================= 3. TAB: HYGGE FOREST (휘게포레스트) ================= -->
+      <div id="tab-content-hygge" class="tab-content-pane" style="display: none;">
+        <div class="dest-hero-card">
+          <div class="dest-hero-title">
+            <span>⛺</span> 휘게포레스트 캠핑장
+          </div>
+          <div class="dest-hero-desc">
+            <strong>2~3일차 (10/18 일 ~ 10/19 월)</strong> 평창군 방림면 운교리.<br>
+            자작나무 숲속에서 누리는 2박 3일 럭셔리 감성 캠핑! 정모 해산 후 장보기부터 장어 바비큐까지 이어집니다.
+          </div>
+          <div class="dest-tags">
+            <span class="dest-tag">2~3일차 (2박)</span>
+            <span class="dest-tag">정모 조식(황태해장국)</span>
+            <span class="dest-tag">슬로프 체험</span>
+            <span class="dest-tag">하나로마트 장보기</span>
+            <span class="dest-tag">장어 바비큐</span>
+          </div>
+        </div>
+
+        <!-- 2일차 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">2일차 (10/18 일)</div>
+            <div class="day-date-str">정모 피날레 & 캠핑 입실</div>
+          </div>
+
+          <!-- 2일차 정모 피날레 타임테이블 -->
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span>🚙</span> 랭글러 전국정모 2일차 공식 일정
+            </div>
+            <ul class="timeline-list">
+              <li class="timeline-item">
+                <span class="timeline-time">08:00 ~ 09:30</span>
+                <span class="timeline-desc">
+                  <strong>조식 (황태해장국)</strong>
+                  <span class="timeline-loc">장소: 카페테리아 아백 (블리스힐스테이 웰니스홀 앞)</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">09:30 ~ 11:00</span>
+                <span class="timeline-desc">
+                  <strong>숙소 체크아웃</strong>
+                  <span class="timeline-loc">각 숙소 프론트에서 퇴실</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">11:00 ~ 12:30</span>
+                <span class="timeline-desc">
+                  <strong>슬로프 체험, 단체 기념사진 & 2일차 경품 추첨</strong>
+                  <span class="timeline-loc">장소: 애니포레 · 골드코스</span>
+                </span>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-time">12:30</span>
+                <span class="timeline-desc">
+                  <strong>정모 공식 행사 종료 및 해산</strong>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 아침 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill rally">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">황태해장국 (정모 제공 조식)</div>
+                <div class="meal-note">08:00 ~ 09:30 블리스힐스테이 앞 '카페테리아 아백'</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 점심 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">롯데리아 & 마트 장보기</div>
+                <div class="meal-note">12:30 정모 해산 후 이동 중 햄버거 점심 식사</div>
+                <div class="sub-item-box">
+                  <div class="sub-item-header">🛒 마트 장보기 (하나로마트 or 롯데슈퍼)</div>
+                  <div class="sub-item-content">
+                    • <strong>저녁거리:</strong> 장어구이 재료 (장어, 생강채, 소스)<br>
+                    • <strong>캠핑 연료:</strong> 이소가스<br>
+                    • <strong>식수/주류:</strong> 생수, 맥주/소주, 음료<br>
+                    • <strong>간편식:</strong> 컵라면 (다음날 아침용)
+                  </div>
+                  <div class="map-btn-group" style="margin-top:5px;">
+                    <a href="https://m.map.naver.com/search2/search.naver?query=평창+하나로마트" target="_blank" class="map-chip naver">평창 하나로마트</a>
+                    <a href="https://m.map.naver.com/search2/search.naver?query=평창+롯데슈퍼" target="_blank" class="map-chip naver">평창 롯데슈퍼</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 저녁 -->
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title">장본 음식 (장어 바비큐?)</div>
+                <div class="meal-note">휘게포레스트 텐트 피칭 완료 후 즐기는 장어구이 & 불멍 타임</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3일차 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">3일차 (10/19 월)</div>
+            <div class="day-date-str">올데이 숲속 힐링 데이</div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">캠핑장 매점</div>
+                <div class="meal-note">웰컴라운지 매점의 드립커피 & 모닝 토스트/간식</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">매점 or 마트 다녀오기</div>
+                <div class="meal-note">캠핑장 매점 간편식 또는 평창 방림/대화면 하나로마트 드라이브 나들이</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title">캠핑장 매점 & 요리</div>
+                <div class="meal-note">조용한 월요일 자작나무 숲속에서 즐기는 마지막 캠핑의 밤 만찬</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-title">💡 휘게포레스트 캠핑 팁</div>
+          휘게포레스트는 고급스러운 샤워실과 라운지 매점(와인, 식료품 구비)을 자랑합니다. 계곡 인근이라 밤 기온이 차니 난로와 침낭 보온에 신경써주세요.
+        </div>
+      </div>
+
+      <!-- ================= 4. TAB: RESOM JECHEON (리솜 제천) ================= -->
+      <div id="tab-content-resom" class="tab-content-pane" style="display: none;">
+        <div class="dest-hero-card">
+          <div class="dest-hero-title">
+            <span>🌲</span> 포레스트 리솜 제천
+          </div>
+          <div class="dest-hero-desc">
+            <strong>4~5일차 (10/20 화 ~ 10/21 수)</strong> 충북 제천시 백운면 평동리.<br>
+            자연을 품은 프라이빗 힐링 리조트! 제천 중앙시장 분식 투어 & 해브나인 힐링스파 인피니티풀을 즐기는 일정입니다.
+          </div>
+          <div class="dest-tags">
+            <span class="dest-tag">4~5일차 (2박)</span>
+            <span class="dest-tag">제천시장 빨간오뎅</span>
+            <span class="dest-tag">덩실분식 찹쌀떡</span>
+            <span class="dest-tag">효강정</span>
+            <span class="dest-tag">더그릴720</span>
+            <span class="dest-tag">모요우</span>
+            <span class="dest-tag">해브나인 스파</span>
+            <span class="dest-tag">둥지치킨</span>
+          </div>
+        </div>
+
+        <!-- 4일차 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">4일차 (10/20 화)</div>
+            <div class="day-date-str">체크인 & 제천시장 미식 투어</div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">컵라면</div>
+                <div class="meal-note">캠핑장 텐트 철수 전 빠르고 따끈하게 한 그릇</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">제천 중앙시장 대표 먹거리 3선</div>
+                <div class="meal-note">
+                  🍡 <strong>외가집:</strong> 매콤한 제천 명물 빨간오뎅 & 바삭한 수제튀김<br>
+                  🍩 <strong>덩실분식:</strong> 50년 전통 쫄깃한 수제 찹쌀떡 & 링도넛<br>
+                  🍗 <strong>효강정:</strong> 바삭하고 촉촉한 양념 수제 닭강정
+                </div>
+                <div class="sub-item-box">
+                  <div class="sub-item-header">☕ 식후 추천 카페</div>
+                  <div class="sub-item-content"><strong>다람쥐까페:</strong> 숲속 뷰를 바라보며 여유로운 커피 타임</div>
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+외가집" target="_blank" class="map-chip naver">외가집</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+덩실분식" target="_blank" class="map-chip naver">덩실분식</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+효강정" target="_blank" class="map-chip naver">효강정</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=리솜+다람쥐카페" target="_blank" class="map-chip kakao">다람쥐까페</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title">더그릴720 / 모요우 + 둥지치킨</div>
+                <div class="meal-note">
+                  리솜 야외 글램핑 바비큐 <strong>더그릴720</strong> 또는 모던 일식 <strong>모요우</strong>에서 저녁 식사 후, 객실 야식으로 <strong>둥지치킨</strong> 포장!
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=리솜+더그릴720" target="_blank" class="map-chip naver">더그릴720</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=포레스트리솜+모요우" target="_blank" class="map-chip naver">모요우</a>
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+둥지치킨" target="_blank" class="map-chip kakao">둥지치킨</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5일차 -->
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">5일차 (10/21 수)</div>
+            <div class="day-date-str">수영장 & 해브나인 힐링스파</div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">리솜 내 편의점 (CU)</div>
+                <div class="meal-note">간단하게 아침 샌드위치 & 커피 후 스파 입장</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">푸드오클락 (수영장 내 식음)</div>
+                <div class="meal-note">
+                  🏊‍♂️ <strong>해브나인 힐링스파:</strong> 인피니티풀 수영 중간 푸드오클락에서 돈까스, 우동, 떡볶이 등으로 점심 해결!
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=포레스트리솜+해브나인힐링스파" target="_blank" class="map-chip naver">해브나인스파 정보</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill dinner">저녁</span>
+              <div class="meal-content">
+                <div class="meal-title">더그릴720 / 모요우</div>
+                <div class="meal-note">
+                  어제 못 가본 식당(바비큐 or 이자카야)에서 리솜의 마지막 밤 만찬 즐기기
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-title">💡 리솜 제천 꿀팁</div>
+          • <strong>더그릴720:</strong> 야외 바비큐장은 당일 사전 예약 필수!<br>
+          • <strong>해브나인 스파:</strong> 모자(캡모자 가능) 착용 필수이며, 핸드폰 방수팩을 챙기시면 인피니티풀과 스톤스파에서 멋진 사진을 남길 수 있습니다.
+        </div>
+      </div>
+
+      <!-- ================= 5. TAB: RETURN (복귀 여정) ================= -->
+      <div id="tab-content-return" class="tab-content-pane" style="display: none;">
+        <div class="dest-hero-card">
+          <div class="dest-hero-title">
+            <span>🚗</span> 복귀 여정 & 피날레
+          </div>
+          <div class="dest-hero-desc">
+            <strong>6일차 (10/22 목)</strong> 5박 6일 행복했던 여정을 마무리하는 날.<br>
+            체크아웃 후 얼큰하고 진한 한우사골 짬뽕으로 해장 겸 개운하게 점심 식사!
+          </div>
+          <div class="dest-tags">
+            <span class="dest-tag">6일차 일정</span>
+            <span class="dest-tag">체크아웃 (11:00)</span>
+            <span class="dest-tag">이비가 짬뽕</span>
+            <span class="dest-tag">안전운전</span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">
+            <div class="day-badge">6일차 (10/22 목) 식사 플랜</div>
+            <div class="day-date-str">귀가길</div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill morning">아침</span>
+              <div class="meal-content">
+                <div class="meal-title">편의점 간편식</div>
+                <div class="meal-note">체크아웃(11:00) 전 객실에서 가벼운 아침 & 퇴실 준비</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-inner">
+              <span class="meal-type-pill lunch">점심</span>
+              <div class="meal-content">
+                <div class="meal-title">이비가 짬뽕 (제천점)</div>
+                <div class="meal-note">
+                  자연 발효 추출물과 특허받은 알칼리수로 끓여 속 편하고 진한 한우사골 짬뽕 & 쫄깃한 찹쌀탕수육으로 여행 완벽 마무리!
+                </div>
+                <div class="map-btn-group">
+                  <a href="https://m.map.naver.com/search2/search.naver?query=제천+이비가짬뽕" target="_blank" class="map-chip naver">🟢 제천점 네이버 지도</a>
+                  <a href="https://m.map.kakao.com/actions/searchView?q=제천+이비가짬뽕" target="_blank" class="map-chip kakao">🟡 카카오맵</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-title">💡 귀가길 안전 체크</div>
+          장거리 운전 전 타이어 공기압을 확인하고, 고속도로 졸음쉼터나 휴게소에서 충분한 휴식을 취하며 안전하게 귀가하세요!
+        </div>
+      </div>
+
+      <!-- ================= 6. TAB: SHOPPING & CHECKLIST (체크리스트) ================= -->
+      <div id="tab-content-shopping" class="tab-content-pane" style="display: none;">
+        <div class="dest-hero-card">
+          <div class="dest-hero-title">
+            <span>🛒</span> 장보기 & 필수 준비 체크리스트
+          </div>
+          <div class="dest-hero-desc">
+            일정 중 챙겨야 할 물품들을 체크해보세요. (체크 상태는 기기에 자동 저장됩니다.)
+          </div>
+        </div>
+
+        <div class="checklist-card">
+          <div class="checklist-title">
+            <span>🎒</span> 사전 준비 (출발 전)
+          </div>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-prep-1" onchange="toggleCheck('c-prep-1')">
+            <span>1일차 아침 삼각김밥 전날 미리 사두기</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-prep-2" onchange="toggleCheck('c-prep-2')">
+            <span>정모 야외활동용 방한 외투/플리스 챙기기</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-prep-3" onchange="toggleCheck('c-prep-3')">
+            <span>수영장용 수영복 / 모자(캡모자) / 방수팩</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-prep-4" onchange="toggleCheck('c-prep-4')">
+            <span>정모 석식 뷔페용 명찰 & 식권 챙기기</span>
+          </label>
+        </div>
+
+        <div class="checklist-card">
+          <div class="checklist-title">
+            <span>🥩</span> 2일차 마트 장보기 (하나로마트/롯데슈퍼)
+          </div>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-mart-1" onchange="toggleCheck('c-mart-1')">
+            <span>저녁 메인 요리 (장어구이 or 고기류)</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-mart-2" onchange="toggleCheck('c-mart-2')">
+            <span>이소가스 (캠핑 버너용 연료)</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-mart-3" onchange="toggleCheck('c-mart-3')">
+            <span>생수 (식수 및 조리용)</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-mart-4" onchange="toggleCheck('c-mart-4')">
+            <span>주류 및 음료</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-mart-5" onchange="toggleCheck('c-mart-5')">
+            <span>컵라면 (철수일 아침 및 비상식량)</span>
+          </label>
+        </div>
+
+        <div class="checklist-card">
+          <div class="checklist-title">
+            <span>🍡</span> 제천 중앙시장 먹거리 포장 리스트
+          </div>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-market-1" onchange="toggleCheck('c-market-1')">
+            <span>외가집 빨간오뎅 & 튀김</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-market-2" onchange="toggleCheck('c-market-2')">
+            <span>덩실분식 도넛/찹쌀떡 픽업</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-market-3" onchange="toggleCheck('c-market-3')">
+            <span>효강정 수제 닭강정 포장</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" id="c-market-4" onchange="toggleCheck('c-market-4')">
+            <span>둥지치킨 저녁 야식 포장</span>
+          </label>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav-item active" id="bnav-all" onclick="switchTab('all')">
+        <span class="bottom-nav-icon">📋</span>
+        <span>전체보기</span>
+      </button>
+      <button class="bottom-nav-item" id="bnav-yongpyong" onclick="switchTab('yongpyong')">
+        <span class="bottom-nav-icon">🚙</span>
+        <span>용평(1D)</span>
+      </button>
+      <button class="bottom-nav-item" id="bnav-hygge" onclick="switchTab('hygge')">
+        <span class="bottom-nav-icon">⛺</span>
+        <span>휘게(2-3D)</span>
+      </button>
+      <button class="bottom-nav-item" id="bnav-resom" onclick="switchTab('resom')">
+        <span class="bottom-nav-icon">🌲</span>
+        <span>리솜(4-5D)</span>
+      </button>
+      <button class="bottom-nav-item" id="bnav-shopping" onclick="switchTab('shopping')">
+        <span class="bottom-nav-icon">🛒</span>
+        <span>체크리스트</span>
+      </button>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">체크 상태가 저장되었습니다.</div>
+
+  </div>
+
+  <script>
+    // Tab List Definition
+    var ALL_TABS = ['all', 'yongpyong', 'hygge', 'resom', 'return', 'shopping'];
+
+    // Safe Storage Helpers (Prevent security exception in file:// or sandboxed iframes)
+    function safeGet(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function safeSet(key, val) {
+      try {
+        localStorage.setItem(key, val);
+      } catch (e) {}
+    }
+
+    function safeRemove(key) {
+      try {
+        localStorage.removeItem(key);
+      } catch (e) {}
+    }
+
+    // Toast Notification
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 1400);
+    }
+
+    // 100% Reliable Tab Switching Function
+    window.switchTab = function(tabId) {
+      if (!tabId) return;
+
+      // 1. Show matching pane, hide others
+      ALL_TABS.forEach(function(id) {
+        var pane = document.getElementById('tab-content-' + id);
+        if (pane) {
+          pane.style.display = (id === tabId) ? 'block' : 'none';
+        }
+      });
+
+      // 2. Update Top Tabs
+      ALL_TABS.forEach(function(id) {
+        var btn = document.getElementById('tab-btn-' + id);
+        if (btn) {
+          if (id === tabId) {
+            btn.classList.add('active');
+            // Scroll the horizontal bar smoothly to center the active button
+            var container = document.getElementById('tabContainer');
+            if (container) {
+              var btnLeft = btn.offsetLeft;
+              var btnWidth = btn.offsetWidth;
+              var containerWidth = container.offsetWidth;
+              container.scrollTo({
+                left: btnLeft - (containerWidth / 2) + (btnWidth / 2),
+                behavior: 'smooth'
+              });
+            }
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+
+      // 3. Update Bottom Nav
+      ALL_TABS.forEach(function(id) {
+        var bnav = document.getElementById('bnav-' + id);
+        if (bnav) {
+          if (id === tabId) {
+            bnav.classList.add('active');
+          } else {
+            bnav.classList.remove('active');
+          }
+        }
+      });
+
+      // 4. Scroll window to top
+      window.scrollTo(0, 0);
+    };
+
+    // Meal completion toggle
+    window.toggleMeal = function(mealId) {
+      var cards = document.querySelectorAll('.meal-card[data-meal-id="' + mealId + '"]');
+      if (!cards.length) return;
+
+      var isCompleted = cards[0].classList.contains('completed');
+      var newState = !isCompleted;
+
+      cards.forEach(function(card) {
+        var btn = card.querySelector('.meal-check-btn');
+        if (newState) {
+          card.classList.add('completed');
+          if (btn) btn.textContent = '✓ 완료';
+        } else {
+          card.classList.remove('completed');
+          if (btn) btn.textContent = '체크';
+        }
+      });
+
+      if (newState) {
+        safeSet('meal_' + mealId, 'true');
+        showToast('식사 완료 처리되었습니다.');
+      } else {
+        safeRemove('meal_' + mealId);
+        showToast('식사 체크가 해제되었습니다.');
+      }
+    };
+
+    // Checklist item toggle
+    window.toggleCheck = function(checkId) {
+      var box = document.getElementById(checkId);
+      if (!box) return;
+
+      var parent = box.closest('.checklist-item');
+      if (box.checked) {
+        if (parent) parent.classList.add('checked');
+        safeSet('check_' + checkId, 'true');
+        showToast('체크 완료!');
+      } else {
+        if (parent) parent.classList.remove('checked');
+        safeRemove('check_' + checkId);
+      }
+    };
+
+    // Initialize saved states
+    function initSavedStates() {
+      // Restore meals
+      var mealCards = document.querySelectorAll('.meal-card');
+      mealCards.forEach(function(card) {
+        var mealId = card.getAttribute('data-meal-id');
+        if (mealId && safeGet('meal_' + mealId) === 'true') {
+          card.classList.add('completed');
+          var btn = card.querySelector('.meal-check-btn');
+          if (btn) btn.textContent = '✓ 완료';
+        }
+      });
+
+      // Restore checklist
+      var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      checkboxes.forEach(function(box) {
+        var id = box.id;
+        if (id && safeGet('check_' + id) === 'true') {
+          box.checked = true;
+          var parent = box.closest('.checklist-item');
+          if (parent) parent.classList.add('checked');
+        }
+      });
+    }
+
+    // D-Day calculation
+    function initDDay() {
+      var tripStartDate = new Date(2026, 9, 17); // 2026-10-17
+      var today = new Date();
+      var start = new Date(tripStartDate.getFullYear(), tripStartDate.getMonth(), tripStartDate.getDate());
+      var now = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      
+      var diffTime = start - now;
+      var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      var badge = document.getElementById('dDayBadge');
+      if (!badge) return;
+      if (diffDays > 0) {
+        badge.textContent = 'D-' + diffDays + ' 여행 준비중';
+      } else if (diffDays === 0) {
+        badge.textContent = 'D-DAY 여행 첫날! 🎉';
+      } else if (diffDays >= -5) {
+        badge.textContent = '여행 ' + (Math.abs(diffDays) + 1) + '일차 진행중 🚗';
+      } else {
+        badge.textContent = '추억 가득 여행 완료 🌿';
+      }
+    }
+
+    // Run initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      initSavedStates();
+      initDDay();
+    });
+
+    // Fallback immediate execution in case DOMContentLoaded already fired
+    initSavedStates();
+    initDDay();
+  </script>
+</body>
+</html>
